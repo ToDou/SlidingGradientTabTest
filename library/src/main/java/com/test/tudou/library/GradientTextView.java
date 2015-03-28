@@ -20,7 +20,7 @@ public class GradientTextView extends View {
     private int paintColor;
 
     private String content = "淘宝哈安徽";
-    private float currentOffset;
+    private float currentOffset = 1;
 
     public GradientTextView(Context context) {
         this(context, null);
@@ -49,7 +49,13 @@ public class GradientTextView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         calculatePaintColor();
-        canvas.drawText(content, 10, 10, textPaint);
+        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+        //计算文字高度
+        float fontHeight = fontMetrics.bottom - fontMetrics.top;
+        //计算文字baseline
+        float textWidth = textPaint.measureText(content);
+        float textBaseY = getHeight() - (getHeight() - fontHeight)/2 - fontMetrics.bottom;
+        canvas.drawText(content, getWidth() / 2 - textWidth / 2, textBaseY, textPaint);
     }
 
     private void calculatePaintColor() {
@@ -79,6 +85,19 @@ public class GradientTextView extends View {
 
     public void setText(String s) {
         content = s;
+        invalidate();
+    }
+
+    public void setData(int selectColor, int normalColor, String s) {
+        content = s;
+        this.selectColor = selectColor;
+        this.normalColor = normalColor;
+        invalidate();
+    }
+
+    public void setColors(int selectColor, int normalColor) {
+        this.selectColor = selectColor;
+        this.normalColor = normalColor;
         invalidate();
     }
 

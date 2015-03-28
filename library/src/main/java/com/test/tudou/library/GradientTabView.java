@@ -47,7 +47,7 @@ public class GradientTabView extends LinearLayout {
     public void setData(TabValue tabValue) {
         if (tabValue == null) return;
         mGradientIcon.setDrawables(tabValue.selectIcon, tabValue.normalIcon);
-        mGradientText.setText(tabValue.title);
+        mGradientText.setData(tabValue.selectColor, tabValue.normalColor, tabValue.title);
     }
 
     public void updateOffset(float offset) {

@@ -17,7 +17,7 @@ import android.widget.ImageView;
  */
 public class GradientImageView extends View {
 
-    private float currentOffset;
+    private float currentOffset = 1;
 
     private Bitmap selectBitmap;
     private Bitmap normalBitmap;

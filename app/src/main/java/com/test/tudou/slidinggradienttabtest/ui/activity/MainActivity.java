@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public TabValue getPageGradientView(int position) {
-            TabValue tabValue = new TabValue(SELECT_COLOR[position], NORMAL_COLOR[position], TITLE_CONSIGNOR[position]);
+            TabValue tabValue = new TabValue(SELECT_COLOR[position], NORMAL_COLOR[position], getResources().getColor(R.color.theme_primary_light), getResources().getColor(android.R.color.darker_gray), TITLE_CONSIGNOR[position]);
             return tabValue;
         }
 

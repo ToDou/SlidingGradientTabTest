@@ -12,7 +12,6 @@ import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -327,12 +326,14 @@ public class SlidingGradientTab extends HorizontalScrollView {
         if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
 
             View nextTab = tabsContainer.getChildAt(currentPosition + 1);
-            ((GradientTabView) nextTab).updateOffset(1 - currentPositionOffset);
             final float nextTabLeft = nextTab.getLeft();
             final float nextTabRight = nextTab.getRight();
 
             lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
             lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
+
+            ((GradientTabView) nextTab).updateOffset(1 - currentPositionOffset);
+
         }
 
         canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);
@@ -348,6 +349,15 @@ public class SlidingGradientTab extends HorizontalScrollView {
         for (int i = 0; i < tabCount - 1; i++) {
             View tab = tabsContainer.getChildAt(i);
             canvas.drawLine(tab.getRight(), dividerPadding, tab.getRight(), height - dividerPadding, dividerPaint);
+        }
+    }
+
+    private void notifyOtherTabDataSetChanged() {
+        for (int i = 0; i < tabCount; i++) {
+            if (currentPosition != i) {
+                View tab = tabsContainer.getChildAt(i);
+                ((GradientTabView) tab).updateOffset(1);
+            }
         }
     }
 
@@ -376,6 +386,9 @@ public class SlidingGradientTab extends HorizontalScrollView {
 
             if (delegatePageListener != null) {
                 delegatePageListener.onPageScrollStateChanged(state);
+            }
+            if (state == ViewPager.SCROLL_STATE_IDLE) {
+                notifyOtherTabDataSetChanged();
             }
         }
 
