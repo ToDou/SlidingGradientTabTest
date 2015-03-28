@@ -4,11 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <SeekBar
+        android:id="@+id/seek_bar_fragment_test"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:maxHeight="100px"
+        android:minHeight="100px"
+        android:max="100"
+        android:progress="0"  />
+
     <TextView
         android:id="@+id/text_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.test.tudou.slidinggradienttabtest.ui.view.GradientTextView
+        android:id="@+id/gradient_text_fragment_test"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        />
+
+    <com.test.tudou.slidinggradienttabtest.ui.view.GradientImageView
+        android:id="@+id/gradient_image_fragment_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

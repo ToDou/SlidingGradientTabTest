@@ -12,6 +12,7 @@ import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -317,6 +318,8 @@ public class SlidingGradientTab extends HorizontalScrollView {
             lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
             lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
         }
+
+        Log.e("11111", "currentPosition: " + currentPosition + "       currentPoOffset: " + currentPositionOffset + "     nextTabPostion" + (currentPosition + 1));
 
         canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);
 
