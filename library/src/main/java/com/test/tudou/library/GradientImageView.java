@@ -1,11 +1,10 @@
-package com.test.tudou.slidinggradienttabtest.ui.view;
+package com.test.tudou.library;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -49,7 +48,7 @@ public class GradientImageView extends View {
         calculatePaint();
 
         if (selectBitmap != null && normalBitmap != null) {
-                canvas.drawBitmap(selectBitmap, 0, 0, selectPaint);
+            canvas.drawBitmap(selectBitmap, 0, 0, selectPaint);
             canvas.drawBitmap(normalBitmap, 0, 0, normalPaint);
             requestLayout();
         }
@@ -57,8 +56,8 @@ public class GradientImageView extends View {
     }
 
     private void calculatePaint() {
-        selectPaint.setAlpha((int)(100 * (1 - currentOffset)));
-        normalPaint.setAlpha((int)(100 * currentOffset));
+        selectPaint.setAlpha((int) (100 * (1 - currentOffset)));
+        normalPaint.setAlpha((int) (100 * currentOffset));
         Log.e("color", currentOffset + "");
     }
 
@@ -70,9 +69,9 @@ public class GradientImageView extends View {
         int b0 = startColor & 0xff;
         int b1 = endColor & 0xff;
 
-        int r2 = (int)(r0 * (1 - offset) + r1 * offset);
-        int g2 = (int)(g0 * (1 - offset) + g1 * offset);
-        int b2 = (int)(b0 * (1 - offset) + b1 * offset);
+        int r2 = (int) (r0 * (1 - offset) + r1 * offset);
+        int g2 = (int) (g0 * (1 - offset) + g1 * offset);
+        int b2 = (int) (b0 * (1 - offset) + b1 * offset);
 
         return Color.argb(100, r2, g2, b2);
     }
@@ -86,6 +85,7 @@ public class GradientImageView extends View {
         selectBitmap = BitmapFactory.decodeResource(getResources(), selectDrawable);
         normalBitmap = BitmapFactory.decodeResource(getResources(), normalDrawable);
         invalidate();
+        requestLayout();
     }
 
 }

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 
 import com.test.tudou.library.SlidingGradientTab;
+import com.test.tudou.library.model.TabValue;
 import com.test.tudou.slidinggradienttabtest.R;
 import com.test.tudou.slidinggradienttabtest.ui.fragment.FragmentTest;
 
@@ -38,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
         mAdapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
         mSlidingTab.setTextColor(getResources().getColor(R.color.theme_primary_light));
+        mSlidingTab.setIndicatorHeight(0);
         mSlidingTab.setIndicatorColor(getResources().getColor(R.color.theme_primary_light));
         mSlidingTab.setViewPager(mViewPager);
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
@@ -45,17 +47,20 @@ public class MainActivity extends ActionBarActivity {
         mViewPager.setPageMargin(pageMargin);
     }
 
-    public class MyPagerAdapter extends FragmentPagerAdapter {
+    public class MyPagerAdapter extends FragmentPagerAdapter implements SlidingGradientTab.GradientTabProvider {
 
         private final String[] TITLE_CONSIGNOR = {"待支付", "待出发", "已出发", "已完成"};
+        private final int[] SELECT_COLOR = {R.mipmap.ic_tab_c0_selected, R.mipmap.ic_tab_c1_selected, R.mipmap.ic_tab_c2_selected, R.mipmap.ic_tab_c3_selected};
+        private final int[] NORMAL_COLOR = {R.mipmap.ic_tab_c0, R.mipmap.ic_tab_c1, R.mipmap.ic_tab_c2, R.mipmap.ic_tab_c3};
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLE_CONSIGNOR[position];
+        public TabValue getPageGradientView(int position) {
+            TabValue tabValue = new TabValue(SELECT_COLOR[position], NORMAL_COLOR[position], TITLE_CONSIGNOR[position]);
+            return tabValue;
         }
 
         @Override

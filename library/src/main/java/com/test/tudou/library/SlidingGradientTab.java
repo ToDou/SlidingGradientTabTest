@@ -22,6 +22,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.test.tudou.library.model.TabValue;
+
 import java.util.Locale;
 
 /**
@@ -31,6 +33,10 @@ public class SlidingGradientTab extends HorizontalScrollView {
 
     public interface IconTabProvider {
         public int getPageIconResId(int position);
+    }
+
+    public interface GradientTabProvider {
+        public TabValue getPageGradientView(int position);
     }
 
     // @formatter:off
@@ -181,6 +187,8 @@ public class SlidingGradientTab extends HorizontalScrollView {
 
             if (pager.getAdapter() instanceof IconTabProvider) {
                 addIconTab(i, ((IconTabProvider) pager.getAdapter()).getPageIconResId(i));
+            } else if (pager.getAdapter() instanceof GradientTabProvider) {
+                addGradientTabView(i, ((GradientTabProvider) pager.getAdapter()).getPageGradientView(i));
             } else {
                 addTextTab(i, pager.getAdapter().getPageTitle(i).toString());
             }
@@ -225,7 +233,12 @@ public class SlidingGradientTab extends HorizontalScrollView {
         tab.setImageResource(resId);
 
         addTab(position, tab);
+    }
 
+    private void addGradientTabView(final int position, TabValue tabValue) {
+        GradientTabView gradientTabView = new GradientTabView(getContext());
+        gradientTabView.setData(tabValue);
+        addTab(position, gradientTabView);
     }
 
     private void addTab(final int position, View tab) {
@@ -308,10 +321,13 @@ public class SlidingGradientTab extends HorizontalScrollView {
         float lineLeft = currentTab.getLeft();
         float lineRight = currentTab.getRight();
 
+        ((GradientTabView) currentTab).updateOffset(currentPositionOffset);
+
         // if there is an offset, start interpolating left and right coordinates between current and next tab
         if (currentPositionOffset > 0f && currentPosition < tabCount - 1) {
 
             View nextTab = tabsContainer.getChildAt(currentPosition + 1);
+            ((GradientTabView) nextTab).updateOffset(1 - currentPositionOffset);
             final float nextTabLeft = nextTab.getLeft();
             final float nextTabRight = nextTab.getRight();
 

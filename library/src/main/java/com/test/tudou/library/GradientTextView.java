@@ -1,4 +1,4 @@
-package com.test.tudou.slidinggradienttabtest.ui.view;
+package com.test.tudou.library;
 
 import android.content.Context;
 import android.graphics.Canvas;

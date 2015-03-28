@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.test.tudou.library.GradientImageView;
+import com.test.tudou.library.GradientTextView;
 import com.test.tudou.slidinggradienttabtest.R;
-import com.test.tudou.slidinggradienttabtest.ui.view.GradientImageView;
-import com.test.tudou.slidinggradienttabtest.ui.view.GradientTextView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
