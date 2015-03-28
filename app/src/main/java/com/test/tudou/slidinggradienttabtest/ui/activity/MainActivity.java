@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 
 import com.test.tudou.library.SlidingGradientTab;
 import com.test.tudou.library.model.TabValue;
+import com.test.tudou.library.transform.ZoomOutPageTransformer;
 import com.test.tudou.slidinggradienttabtest.R;
 import com.test.tudou.slidinggradienttabtest.ui.fragment.FragmentTest;
+import com.test.tudou.slidinggradienttabtest.ui.fragment.FragmentTest2;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -38,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
 
         mAdapter = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
+        mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mSlidingTab.setTextColor(getResources().getColor(R.color.theme_primary_light));
         mSlidingTab.setIndicatorHeight(0);
         mSlidingTab.setIndicatorColor(getResources().getColor(R.color.theme_primary_light));
@@ -65,7 +68,8 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment = FragmentTest.newInstance(position);
+            Fragment fragment;
+            fragment = FragmentTest2.newInstance(position);
             return fragment;
         }
 

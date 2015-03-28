@@ -139,7 +139,7 @@ public class GradientImageView extends View {
         dy = (int) ((vheight - oldHeight * scale) * 0.5f + 0.5f);
 
         matrix.setScale(scale, scale);
-        //matrix.postTranslate(dx, dy);
+        matrix.postTranslate(dx, dy);
         return matrix;
     }
 
