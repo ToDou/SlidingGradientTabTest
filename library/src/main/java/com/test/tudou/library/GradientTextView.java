@@ -55,7 +55,6 @@ public class GradientTextView extends View {
     private void calculatePaintColor() {
         paintColor = calculateGradientColor(selectColor, normalColor, currentOffset);
         textPaint.setColor(paintColor);
-        Log.e("color", currentOffset + "");
     }
 
     private int calculateGradientColor(int startColor, int endColor, float offset) {

@@ -48,7 +48,32 @@ public class GradientImageView extends View {
         normalPaint.setAlpha(100);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(measureHeight(widthMeasureSpec), measureHeight(heightMeasureSpec));
+    }
 
+    private int measureHeight(int heightMeasureSpec) {
+        // TODO Auto-generated method stub
+        int result=0; //结果
+        int specMode=MeasureSpec.getMode(heightMeasureSpec);
+        int specSize=MeasureSpec.getSize(heightMeasureSpec);
+        switch (specMode) {
+            case MeasureSpec.AT_MOST:
+                result=specSize;
+                break;
+            case MeasureSpec.EXACTLY:
+                result=specSize;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                result=1500;
+                break;
+            default:
+                break;
+        }
+        return result;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -75,10 +100,20 @@ public class GradientImageView extends View {
     public void setDrawables(int selectDrawable, int normalDrawable) {
         selectBitmap = BitmapFactory.decodeResource(getResources(), selectDrawable);
         normalBitmap = BitmapFactory.decodeResource(getResources(), normalDrawable);
+        invalidate();
+        requestLayout();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        initMatirx();
+    }
+
+    private void initMatirx() {
         mSelectMatrix = calculateMatrix(selectBitmap);
         mNormalMatrix = calculateMatrix(normalBitmap);
         invalidate();
-        requestLayout();
     }
 
     private Matrix calculateMatrix(Bitmap bitmap) {
