@@ -15,8 +15,8 @@ public class GradientTextView extends View {
 
     private Paint textPaint;
 
-    private int selectColor = getResources().getColor(android.R.color.holo_blue_light);
-    private int normalColor = getResources().getColor(android.R.color.holo_green_light);
+    private int selectColor = getResources().getColor(android.R.color.holo_blue_dark);
+    private int normalColor = getResources().getColor(android.R.color.darker_gray);
     private int paintColor;
 
     private String content = "淘宝哈安徽";
@@ -35,16 +35,21 @@ public class GradientTextView extends View {
         initPaint();
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
     private void initPaint() {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(normalColor);
-        textPaint.setTextSize(40f);
+        textPaint.setTextSize(30f);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         calculatePaintColor();
-        canvas.drawText(content, 100, 100, textPaint);
+        canvas.drawText(content, 10, 10, textPaint);
     }
 
     private void calculatePaintColor() {

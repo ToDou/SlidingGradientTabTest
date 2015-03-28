@@ -21,8 +21,8 @@
 
     <com.test.tudou.library.GradientTextView
         android:id="@+id/gradient_text_fragment_test"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         />
 
     <com.test.tudou.library.GradientImageView

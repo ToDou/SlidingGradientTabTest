@@ -250,7 +250,7 @@ public class SlidingGradientTab extends HorizontalScrollView {
             }
         });
 
-        tab.setPadding(tabPadding, 0, tabPadding, 0);
+        tab.setPadding(0, 0, 0, 0);
         tabsContainer.addView(tab, position, shouldExpand ? expandedTabLayoutParams : defaultTabLayoutParams);
     }
 
@@ -334,8 +334,6 @@ public class SlidingGradientTab extends HorizontalScrollView {
             lineLeft = (currentPositionOffset * nextTabLeft + (1f - currentPositionOffset) * lineLeft);
             lineRight = (currentPositionOffset * nextTabRight + (1f - currentPositionOffset) * lineRight);
         }
-
-        Log.e("11111", "currentPosition: " + currentPosition + "       currentPoOffset: " + currentPositionOffset + "     nextTabPostion" + (currentPosition + 1));
 
         canvas.drawRect(lineLeft, height - indicatorHeight, lineRight, height, rectPaint);
 

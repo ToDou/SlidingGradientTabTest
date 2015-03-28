@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 /**
  * Created by tudou on 15-3-28.
@@ -22,6 +24,9 @@ public class GradientImageView extends View {
 
     private Paint selectPaint;
     private Paint normalPaint;
+
+    private Matrix mSelectMatrix;
+    private Matrix mNormalMatrix;
 
     public GradientImageView(Context context) {
         this(context, null);
@@ -43,13 +48,15 @@ public class GradientImageView extends View {
         normalPaint.setAlpha(100);
     }
 
+
+
     @Override
     protected void onDraw(Canvas canvas) {
         calculatePaint();
-
+        //ImageView
         if (selectBitmap != null && normalBitmap != null) {
-            canvas.drawBitmap(selectBitmap, 0, 0, selectPaint);
-            canvas.drawBitmap(normalBitmap, 0, 0, normalPaint);
+            canvas.drawBitmap(selectBitmap, mSelectMatrix, selectPaint);
+            canvas.drawBitmap(normalBitmap, mNormalMatrix, normalPaint);
             requestLayout();
         }
 
@@ -58,22 +65,6 @@ public class GradientImageView extends View {
     private void calculatePaint() {
         selectPaint.setAlpha((int) (100 * (1 - currentOffset)));
         normalPaint.setAlpha((int) (100 * currentOffset));
-        Log.e("color", currentOffset + "");
-    }
-
-    private int calculateGradientColor(int startColor, int endColor, float offset) {
-        int r0 = (startColor >> 16) & 0xff;
-        int r1 = (endColor >> 16) & 0xff;
-        int g0 = (startColor >> 8) & 0xff;
-        int g1 = (endColor >> 8) & 0xff;
-        int b0 = startColor & 0xff;
-        int b1 = endColor & 0xff;
-
-        int r2 = (int) (r0 * (1 - offset) + r1 * offset);
-        int g2 = (int) (g0 * (1 - offset) + g1 * offset);
-        int b2 = (int) (b0 * (1 - offset) + b1 * offset);
-
-        return Color.argb(100, r2, g2, b2);
     }
 
     public void setPaintData(float offset) {
@@ -84,8 +75,37 @@ public class GradientImageView extends View {
     public void setDrawables(int selectDrawable, int normalDrawable) {
         selectBitmap = BitmapFactory.decodeResource(getResources(), selectDrawable);
         normalBitmap = BitmapFactory.decodeResource(getResources(), normalDrawable);
+        mSelectMatrix = calculateMatrix(selectBitmap);
+        mNormalMatrix = calculateMatrix(normalBitmap);
         invalidate();
         requestLayout();
+    }
+
+    private Matrix calculateMatrix(Bitmap bitmap) {
+        Matrix matrix = new Matrix();
+        int oldWidth = bitmap.getWidth();
+        int oldHeight = bitmap.getHeight();
+        int vwidth = getWidth();
+        int vheight = getHeight();
+
+        float scale;
+        float dx;
+        float dy;
+
+
+        if (oldHeight <= vwidth && oldHeight <= vheight) {
+            scale = 1.0f;
+        } else {
+            scale = Math.min((float) vwidth / (float) oldWidth,
+                    (float) vheight / (float) oldHeight);
+        }
+
+        dx = (int) ((vwidth - oldWidth * scale) * 0.5f + 0.5f);
+        dy = (int) ((vheight - oldHeight * scale) * 0.5f + 0.5f);
+
+        matrix.setScale(scale, scale);
+        //matrix.postTranslate(dx, dy);
+        return matrix;
     }
 
 }

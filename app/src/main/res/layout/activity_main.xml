@@ -20,8 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white"
-        app:pstsShouldExpand="true"
-        android:elevation="4dp"/>
+        app:pstsUnderlineHeight="0dp"
+        app:pstsDividerColor="@android:color/transparent"
+        app:pstsShouldExpand="true"/>
 
 
 </LinearLayout>
