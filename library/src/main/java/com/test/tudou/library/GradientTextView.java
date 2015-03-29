@@ -75,7 +75,7 @@ public class GradientTextView extends View {
         int g2 = (int)(g0 * (1 - offset) + g1 * offset);
         int b2 = (int)(b0 * (1 - offset) + b1 * offset);
 
-        return Color.argb(100, r2, g2, b2);
+        return Color.argb(255, r2, g2, b2);
     }
 
     public void setPaintData(float offset) {

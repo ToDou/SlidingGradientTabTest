@@ -88,8 +88,8 @@ public class GradientImageView extends View {
     }
 
     private void calculatePaint() {
-        selectPaint.setAlpha((int) (100 * (1 - currentOffset)));
-        normalPaint.setAlpha((int) (100 * currentOffset));
+        selectPaint.setAlpha((int) (255 * (1 - currentOffset)));
+        normalPaint.setAlpha((int) (255 * currentOffset));
     }
 
     public void setPaintData(float offset) {

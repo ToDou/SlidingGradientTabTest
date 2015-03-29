@@ -7,8 +7,9 @@
 
     <com.test.tudou.library.GradientImageView
         android:id="@android:id/icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
         android:layout_gravity="center_horizontal"
         />
 

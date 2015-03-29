@@ -53,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
     public class MyPagerAdapter extends FragmentPagerAdapter implements SlidingGradientTab.GradientTabProvider {
 
         private final String[] TITLE_CONSIGNOR = {"待支付", "待出发", "已出发", "已完成"};
-        private final int[] SELECT_COLOR = {R.mipmap.ic_tab_c0_selected, R.mipmap.ic_tab_c1_selected, R.mipmap.ic_tab_c2_selected, R.mipmap.ic_tab_c3_selected};
+        private final int[] SELECT_COLOR = {R.mipmap.ic_tab_c0_select, R.mipmap.ic_tab_c1_select, R.mipmap.ic_tab_c2_select, R.mipmap.ic_tab_c3_select};
         private final int[] NORMAL_COLOR = {R.mipmap.ic_tab_c0, R.mipmap.ic_tab_c1, R.mipmap.ic_tab_c2, R.mipmap.ic_tab_c3};
 
         public MyPagerAdapter(FragmentManager fm) {

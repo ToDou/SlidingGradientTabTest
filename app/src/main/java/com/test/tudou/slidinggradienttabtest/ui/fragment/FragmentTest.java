@@ -53,7 +53,7 @@ public class FragmentTest extends Fragment {
         ButterKnife.inject(this, view);
 
         mText.setText("position: " + position);
-        mGradientImageView.setDrawables(R.mipmap.ic_tab_c0_selected, R.mipmap.ic_launcher);
+        mGradientImageView.setDrawables(R.mipmap.ic_tab_c0_select, R.mipmap.ic_launcher);
         mSeekBar.setMax(100);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
