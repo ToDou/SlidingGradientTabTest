@@ -4,6 +4,8 @@
     <color name="windowBackground">#F4F4F4</color>
     <color name="theme_primary">#FFFFFF</color>
     <color name="theme_primary_dark">#D6514D</color>
-    <color name="theme_primary_light">#D6514D</color>
+    <color name="theme_primary_light">#ec6d51</color>
+    <color name="tab_color_select">@color/theme_primary_light</color>
+    <color name="tab_color_normal">#919191</color>
 
 </resources>

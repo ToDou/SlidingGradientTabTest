@@ -52,7 +52,7 @@ public class MainActivity extends ActionBarActivity {
 
     public class MyPagerAdapter extends FragmentPagerAdapter implements SlidingGradientTab.GradientTabProvider {
 
-        private final String[] TITLE_CONSIGNOR = {"待支付", "待出发", "已出发", "已完成"};
+        private final String[] TITLE_CONSIGNOR = {"Account", "Favorite", "World", "Chart"};
         private final int[] SELECT_COLOR = {R.mipmap.ic_tab_c0_select, R.mipmap.ic_tab_c1_select, R.mipmap.ic_tab_c2_select, R.mipmap.ic_tab_c3_select};
         private final int[] NORMAL_COLOR = {R.mipmap.ic_tab_c0, R.mipmap.ic_tab_c1, R.mipmap.ic_tab_c2, R.mipmap.ic_tab_c3};
 
@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public TabValue getPageGradientView(int position) {
-            TabValue tabValue = new TabValue(SELECT_COLOR[position], NORMAL_COLOR[position], getResources().getColor(R.color.theme_primary_light), getResources().getColor(android.R.color.darker_gray), TITLE_CONSIGNOR[position]);
+            TabValue tabValue = new TabValue(SELECT_COLOR[position], NORMAL_COLOR[position], getResources().getColor(R.color.tab_color_select), getResources().getColor(R.color.tab_color_normal), TITLE_CONSIGNOR[position]);
             return tabValue;
         }
 

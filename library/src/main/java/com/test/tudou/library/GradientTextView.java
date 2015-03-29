@@ -43,7 +43,7 @@ public class GradientTextView extends View {
     private void initPaint() {
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(normalColor);
-        textPaint.setTextSize(30f);
+        textPaint.setTextSize(26f);
     }
 
     @Override
