@@ -9,7 +9,7 @@ import com.nineoldandroids.view.ViewHelper;
  * Created by tudou on 15-3-29.
  */
 public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
-    private static final float MIN_SCALE = 0.85f;
+    private static final float MIN_SCALE = 0.6f;
     private static final float MIN_ALPHA = 0.5f;
 
     public void transformPage(View view, float position) {
@@ -21,16 +21,15 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
             // This page is way off-screen to the left.
             ViewHelper.setAlpha(view, 0);
 
+        } else if (position < 0) {
+            // Fade the page relative to its size.
+            ViewHelper.setAlpha(view, 1.0f);
         } else if (position <= 1) { // [-1,1]
             // Modify the default slide transition to shrink the page as well
             float scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position));
             float vertMargin = pageHeight * (1 - scaleFactor) / 2;
             float horzMargin = pageWidth * (1 - scaleFactor) / 2;
-            if (position < 0) {
-                ViewHelper.setTranslationX(view, horzMargin - vertMargin / 2);
-            } else {
-                ViewHelper.setTranslationX(view, -horzMargin + vertMargin / 2);
-            }
+            ViewHelper.setTranslationX(view, pageWidth * - position);
 
             // Scale the page down (between MIN_SCALE and 1)
             ViewHelper.setScaleX(view, scaleFactor);
@@ -38,8 +37,7 @@ public class ZoomOutPageTransformer implements ViewPager.PageTransformer {
 
             // Fade the page relative to its size.
             ViewHelper.setAlpha(view, MIN_ALPHA +
-                    (scaleFactor - MIN_SCALE) /
-                            (1 - MIN_SCALE) * (1 - MIN_ALPHA));
+                            (1 - MIN_SCALE) * (1 - Math.abs(position)));
 
         } else { // (1,+Infinity]
             // This page is way off-screen to the right.
